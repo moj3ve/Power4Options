@@ -114,6 +114,21 @@ void runCommand(const char* command) {
   UIView* knobView = [actionSlider _knobView];
   [knobView addGestureRecognizer:tap];
 }
+
+-(void)powerDown {
+  if(![[POMode sharedInstance] mode] || [[[POMode sharedInstance] mode] isEqualToString:@"SHUTDOWN"])
+    %orig;
+  if([[[POMode sharedInstance] mode] isEqualToString:@"RESPRING"]) {
+    if(access("/usr/bin/sbreload", F_OK) == 0)
+      runCommand("sbreload");
+    else
+      [[%c(FBSystemService) sharedInstance] exitAndRelaunch:YES];
+  }
+  if([[[POMode sharedInstance] mode] isEqualToString:@"REBOOT"])
+    [[%c(FBSystemService) sharedInstance] shutdownAndReboot:YES];
+  if([[[POMode sharedInstance] mode] isEqualToString:@"SAFEMODE"])
+    runCommand("safemode");
+}
 %end
 %end
 

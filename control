@@ -1,9 +1,9 @@
 Package: kr.xsf1re.power4options
 Name: Power4Options
-Version: 2.0
+Version: 2.0.1
 Architecture: iphoneos-arm
 Description: A lightweight extension for PowerOptions.
 Maintainer: XsF1re
 Author: XsF1re
 Section: Tweaks
-Depends: mobilesubstrate (>= 0.9.5000)
+Depends: firmware (>= 11.0), mobilesubstrate (>= 0.9.5000)
